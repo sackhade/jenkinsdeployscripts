@@ -1,5 +1,5 @@
 pipeline { 
-    agent co-sf-pe-171 
+    agent { label 'co-sf-pe-171' }
     options {
         skipStagesAfterUnstable()
     }
