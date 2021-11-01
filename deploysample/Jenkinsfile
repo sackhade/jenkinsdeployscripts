@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('checkout another repo'){
             steps { 
-                sh 'checkout another repo'
+                sh 'echo checkout another repo'
 		git url: 'https://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@github.com/sackhade/jenkinsgitrepo.git'
             }
         }
