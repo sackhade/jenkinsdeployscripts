@@ -36,7 +36,7 @@ pipeline {
         }
         success {
             echo 'I succeeded!'
-            mail to: 'Team-Janus.Testers@ddn.com;skhade@ddn.co',
+            mail to: 'Team-Janus.Testers@ddn.com,skhade@ddn.co',
 	    from: 'pipelinedemo@ddn.com',
             subject: "Succeeded Pipeline: ${currentBuild.fullDisplayName}",
             body: "Build URL here ${env.BUILD_URL}"	    
