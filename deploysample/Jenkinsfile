@@ -8,7 +8,7 @@ pipeline {
             steps { 
                 sh 'echo checkout another repo'
 		dir('jenkinsgitrepo') {
-		    git branch: main, 
+		    git branch: 'main', 
 		    url: 'https://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@github.com/sackhade/jenkinsgitrepo.git'
 
 		}
