@@ -7,7 +7,11 @@ pipeline {
         stage('checkout another repo'){
             steps { 
                 sh 'echo checkout another repo'
-		git url: 'https://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@github.com/sackhade/jenkinsgitrepo.git'
+		dir('jenkinsgitrepo') {
+		    git branch: main, 
+		    url: 'https://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@github.com/sackhade/jenkinsgitrepo.git'
+
+		}
             }
         }
         stage('execute some commands on checked out repo'){
