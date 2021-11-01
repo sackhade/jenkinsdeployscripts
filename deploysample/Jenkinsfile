@@ -4,19 +4,31 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
-        stage('Build') { 
+        stage('checkout another repo'){
             steps { 
-                sh 'echo buildstage' 
+                sh 'checkout another repo'
+		checkout(
+		    [$class: 'GitSCM', 
+		    branches: [[name: '*/main']], 
+		    doGenerateSubmoduleConfigurations: false, 
+		    extensions: [], 
+		    submoduleCfg: [], 
+		    userRemoteConfigs: [[url: 'https://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@github.com/sackhade/jenkinsgitrepo.git']]
+		    ])
             }
         }
-        stage('Test'){
+        stage('execute some commands on checked out repo'){
             steps {
-                sh 'echo teststage'
+                sh 'echo execute some commands on checked out repo'
+		dir('jenkinsgitrepo') {
+		    sh 'ls -ltr'
+		    sh 'somesampleshellscript.sh'
+		}
             }
         }
-        stage('Deploy') {
+        stage('bye') {
             steps {
-                sh 'echo deploystage'
+                sh 'echo bye'
    	    }
         }
     }
