@@ -1,0 +1,23 @@
+pipeline { 
+    agent co-sf-pe-171 
+    options {
+        skipStagesAfterUnstable()
+    }
+    stages {
+        stage('Build') { 
+            steps { 
+                sh 'echo buildstage' 
+            }
+        }
+        stage('Test'){
+            steps {
+                sh 'echo teststage'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo deploystage'
+   	    }
+        }
+    }
+}
