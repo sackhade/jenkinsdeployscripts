@@ -41,6 +41,7 @@ pipeline {
         }
         success {
             echo 'I succeeded!'
+	    echo 'Sending email to: ${EMAILTO}'
             mail to: '${EMAILTO}',
 	    from: 'pipelinedemo@ddn.com',
             subject: "Succeeded Pipeline: ${currentBuild.fullDisplayName}",
