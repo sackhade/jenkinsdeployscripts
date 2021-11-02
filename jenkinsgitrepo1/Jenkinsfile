@@ -17,9 +17,9 @@ pipeline {
             steps {
                 sh 'echo execute some commands on checked out repo'
 		            dir('jenkinsgitrepo1') {
-		                sh 'chmod +rx somesampleshellscript.sh'
+		                sh 'chmod +rx jenkinsgitrepo1.sh'
 		                sh 'ls -ltr'
-		                sh './somesampleshellscript.sh'
+		                sh './jenkinsgitrepo1.sh'
 		            }
             }
         }
