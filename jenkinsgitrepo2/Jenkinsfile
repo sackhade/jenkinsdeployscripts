@@ -1,32 +1,34 @@
-pipeline { 
+pipeline {
     agent { label 'co-sf-pe-171' }
     parameters {
         string(name: 'CODEREPOURL', defaultValue: 'https://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@github.com/sackhade/jenkinsgitrepo2.git', description: 'From where to checkout code')
+        string(name: 'PARAMFROMCALLER', defaultValue: 'not updated', description: 'param which will be passed from caller with certain value and printed in this script.')
     }
     stages {
         stage('checkout code repo'){
-            steps { 
-                 sh 'echo checkout code repo jenkinsgitrepo2'
-		             dir('jenkinsgitrepo2') {
-		                git branch: 'main', 
-		                url: "${params.CODEREPOURL}"
-                 }
+            steps {
+                sh 'echo checkout code repo jenkinsgitrepo2'
+                    dir('jenkinsgitrepo2') {
+                    git branch: 'main',
+                    url: "${params.CODEREPOURL}"
+                }
             }
         }
         stage('execute some commands on checked out repo'){
             steps {
                 sh 'echo execute some commands on checked out repo'
-		            dir('jenkinsgitrepo2') {
-		                sh 'chmod +rx jenkinsgitrepo2.sh'
-		                sh 'ls -ltr'
-		                sh './jenkinsgitrepo2.sh'
-		            }
+                    dir('jenkinsgitrepo2') {
+                    sh 'chmod +rx jenkinsgitrepo2.sh'
+                    sh 'ls -ltr'
+                    sh './jenkinsgitrepo2.sh'
+                }
             }
         }
-        stage('bye') {
+        stage('print param from caller') {
             steps {
-                sh 'echo bye for jenkinsgitrepo1'
-   	        }
+                echo "value of PARAMFROMCALLER: ${PARAMFROMCALLER}"
+            }
         }
     }
 }
+
