@@ -16,7 +16,7 @@ pipeline {
 		}
             }
         }
-        stage('execute some commands on checked out repo'){
+        stage('shell script from repo'){
             steps {
                 sh 'echo execute some commands on checked out repo'
 		dir('jenkinsgitrepo') {
@@ -44,7 +44,7 @@ pipeline {
                }
 	    }
 	}
-        stage('bye') {
+        stage('done') {
             steps {
                 sh 'echo bye'
    	    }
