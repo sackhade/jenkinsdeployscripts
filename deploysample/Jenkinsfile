@@ -39,7 +39,7 @@ pipeline {
         success {
             echo 'I succeeded!'
 	    echo 'Sending email to: ${params.EMAILTO}'
-            mail to: '${params.EMAILTO}',
+            mail to: "${params.EMAILTO}",
 	    from: 'pipelinedemo@ddn.com',
             subject: "Succeeded Pipeline: ${currentBuild.fullDisplayName}",
             body: "Build URL here ${env.BUILD_URL}"	    
@@ -49,7 +49,7 @@ pipeline {
         }
         failure {
             echo 'I failed :('
-	    mail to: '${params.EMAILTO}',
+	    mail to: "${params.EMAILTO}",
             from: 'pipelinedemo@ddn.com',
             subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
             body: "Something is wrong with ${env.BUILD_URL}"
