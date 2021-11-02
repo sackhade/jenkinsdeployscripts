@@ -26,20 +26,24 @@ pipeline {
 		}
             }
         }
-	stage ('invoke someotherpipeline1') {
-            steps {
-                build job: 'someotherpipeline1', parameters: [
-                string(name: 'PARAMFROMCALLER', value: "someotherpipeline1 value updated from repoongit job")
-                ]
-            }
-        }
-	stage ('invoke someotherpipeline2') {
-            steps {
-                build job: 'someotherpipeline2', parameters: [
-                string(name: 'PARAMFROMCALLER', value: "someotherpipeline2 value updated from repoongit job")
-                ]
-            }
-        }
+	stage('Invoke other pipelines parallely') {
+	    parallel {
+      	        stage ('invoke someotherpipeline1') {
+                    steps {
+                        build job: 'someotherpipeline1', parameters: [
+                        string(name: 'PARAMFROMCALLER', value: "someotherpipeline1 value updated from repoongit job")
+                        ]
+                    }
+                }
+	        stage ('invoke someotherpipeline2') {
+                    steps {
+                        build job: 'someotherpipeline2', parameters: [
+                        string(name: 'PARAMFROMCALLER', value: "someotherpipeline2 value updated from repoongit job")
+                        ]
+                    }
+               }
+	    }
+	}
         stage('bye') {
             steps {
                 sh 'echo bye'
