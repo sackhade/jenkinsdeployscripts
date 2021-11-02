@@ -4,8 +4,8 @@ pipeline {
         skipStagesAfterUnstable()
     }
     parameters {
-        stringParam(name: 'CODEREPOURL', defaultValue: 'https://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@github.com/sackhade/jenkinsgitrepo.git', description: 'From where to checkout code')
-        stringParam(name: 'EMAILTO', defaultValue: 'skhade@ddn.com', description: 'email addresses or DL separated by comma')
+        string(name: 'CODEREPOURL', defaultValue: 'https://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@github.com/sackhade/jenkinsgitrepo.git', description: 'From where to checkout code')
+        string(name: 'EMAILTO', defaultValue: 'skhade@ddn.com', description: 'email addresses or DL separated by comma')
     }
     stages {
         stage('checkout code repo'){
