@@ -4,17 +4,17 @@ pipeline {
         skipStagesAfterUnstable()
     }
     parameters {
-        string(name: 'CODEREPOURL', defaultValue: 'https://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@github.com/sackhade/jenkinsgitrepo.git', description: 'From where to checkout code'),
-        string(name: 'EMAILTO', defaultValue: 'skhade@ddn.com', description: 'email addresses or DL separated by comma')
+        stringParam(name: 'CODEREPOURL', defaultValue: 'https://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@github.com/sackhade/jenkinsgitrepo.git', description: 'From where to checkout code')
+        stringParam(name: 'EMAILTO', defaultValue: 'skhade@ddn.com', description: 'email addresses or DL separated by comma')
     }
     stages {
         stage('checkout code repo'){
             steps { 
-	        echo 'Sending email to: ${EMAILTO}'
+	        echo 'Sending email to: ${params.EMAILTO}'
                 sh 'echo checkout code repo'
 		dir('jenkinsgitrepo') {
 		    git branch: 'main', 
-		    url: '${CODEREPOURL}'
+		    url: '${params.CODEREPOURL}'
 
 		}
             }
@@ -41,8 +41,8 @@ pipeline {
         }
         success {
             echo 'I succeeded!'
-	    echo 'Sending email to: ${EMAILTO}'
-            mail to: '${EMAILTO}',
+	    echo 'Sending email to: ${params.EMAILTO}'
+            mail to: '${params.EMAILTO}',
 	    from: 'pipelinedemo@ddn.com',
             subject: "Succeeded Pipeline: ${currentBuild.fullDisplayName}",
             body: "Build URL here ${env.BUILD_URL}"	    
@@ -52,7 +52,7 @@ pipeline {
         }
         failure {
             echo 'I failed :('
-	    mail to: '${EMAILTO}',
+	    mail to: '${params.EMAILTO}',
             from: 'pipelinedemo@ddn.com',
             subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
             body: "Something is wrong with ${env.BUILD_URL}"
