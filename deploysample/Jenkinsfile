@@ -33,6 +33,13 @@ pipeline {
                 ]
             }
         }
+	stage ('invoke someotherpipeline2') {
+            steps {
+                build job: 'someotherpipeline2', parameters: [
+                string(name: 'PARAMFROMCALLER', value: "someotherpipeline2 value updated from repoongit job")
+                ]
+            }
+        }
         stage('bye') {
             steps {
                 sh 'echo bye'
